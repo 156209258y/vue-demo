@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 body 前面 -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+      * {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- :value  不能同步改变值   v-model 跨域 -->
+    <div id="root">
+      姓:<input type="text" v-model="firstname">
+      名:<input type="text" v-model="lastname">
+      <!-- slice(0,3) 截取前三位   {{}} 中业务太多 推荐使用method-->
+      姓名:<span>{{firstname.slice(0,3)}}-{{lastname}}</span>
+    </div>
+    <script type="text/javascript">
+      Vue.config.productionTip = false; // 阻止 Vue 启动时生成生产提示
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "尚硅谷",
+          firstname:'张',
+          lastname:'三'
+        },
+        methods: {
+           // 添加方法
+        },
+      });
+    </script>
+  </body>
+</html>

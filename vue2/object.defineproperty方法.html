@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 bodys 前面 -->
+    <script type="text/javascript" src="./js/vue.js"></script>
+  </head>
+  <body>
+    <script>
+    //     let number=18
+
+
+
+    //   let person = {
+    //     name: "ceshi",
+    //     sex: "1",
+    //     age:'11',
+    //   };
+
+    //   //age  加入到person  不参与枚举   （不参与便利
+    //   //   使用definproperty   默认就是不可修改  不参加枚举
+    // //   Object.defineProperty(person, 'age', {
+    // //     value: number,
+    // //     enumerable: true, //参加枚举      默认为false
+    // //     writable: true, // 可修改的    默认为false
+    // //     configurable: true, //控制属性是否可以被删除
+    // //   });
+
+    //   for (let index in person) {
+    //     console.log("@", person[index]);
+    //   }
+
+    //   console.log(Object.keys(person));
+    //   console.log(person);
+
+
+
+
+
+
+
+
+      //这种情况当修改number1的值时候  person1.age不会变   
+      let number1=18
+      let person1= {
+        name: "ceshi",
+        sex: "1",
+      };
+// 解决办法
+      Object.defineProperty(person1, 'age', {
+        // value: number1,
+        // enumerable: true, //参加枚举      默认为false
+        // writable: true, // 可修改的    默认为false
+        // configurable: true, //控制属性是否可以被删除
+
+        // 当读取person1.age属性时候  就会调用
+        get(){
+           console.log('获取了age值为',number1)
+            return  number1
+        },
+        // 当修改person1.age属性时候  就会调用
+        set(value){
+           console.log('修改了age值为',value)
+           number1=value
+        }, 
+
+      });
+
+      console.log(person1)
+
+    </script>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //以阻止 vue 在启动时生成生产提示。
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 body 前面 -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+      * {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- watch 和competed区别
+     computed能完成的功能  watch 都可以完成 
+     watch 能完成   compted 不一定   例如 watch可以进行异步操作
+     
+     被vue管理用 普通函数 
+     不被vue管理的   用箭头函数 
+    
+    -->
+
+    <!-- :value  不能同步改变值   v-model 跨域 -->
+    <div id="root">
+      姓:<input type="text" v-model="firstname" /> <br />
+      名:<input type="text" v-model="lastname" /> <br /><br />
+      <!-- slice(0,3) 截取前三位   {{}} 中业务太多 推荐使用method-->
+      姓名:<span>{{fullname}}</span>
+    </div>
+    <script type="text/javascript">
+      Vue.config.productionTip = false; // 阻止 Vue 启动时生成生产提示
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "尚硅谷",
+          firstname: "张",
+          lastname: "三",
+          fullname: "",
+        },
+        watch: {
+          immediate: true,
+          firstname: {
+            immediate: true, //初始化让handler 运行一下
+            handler(newvalue, oldvalue) {
+              this.fullname = newvalue + "-" + this.lastname;
+            },
+          },
+
+          //在watch 可行  在     competed 中不行
+          //watch 可以开启异步任务   competed不行
+          lastname(newvalue, oldvalue) {
+            setTimeout(() => {
+              //此时的this 是vm
+              // setTimeout(function() {   //此时的this 是windown
+              // console.log(this)   ;
+
+              this.fullname = this.firstname + "-" + newvalue;
+            }, 1000);
+          },
+        },
+        methods: {
+          // 添加方法
+        },
+      });
+    </script>
+  </body>
+</html>

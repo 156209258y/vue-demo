@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 bodys 前面 -->
+    <script type="text/javascript" src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{message}}</h2>
+      <button v-on:click="showinfo">点击按钮(不传参)</button>
+      <button @click="showinfo(1234567)">简写按钮(传参（数字）)</button>
+      <!-- :是v-bind 的简写格式 -->
+      <button @click="showinfo($event,66)">按钮(传参（event，数字）)</button>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          message: "测试",
+        },
+        methods: {
+          showinfo(event) {
+            console.log(this); //this 就是vm
+            console.log(event.target); //拿到标签
+            console.log(event.target.innerText); //拿到标签中text
+            // alert("提示");
+          },
+          showinfo(number) {
+            console.log(number); //拿到标签中text
+            // alert("提示");
+          },
+          输出this: (event) => {
+            console.log(this); //箭头函数定义的
+            // 没有自己的this  只能向外找   所以此时的this 就是windows
+          },
+          showinfo(event,number) {
+            console.log(event,number); //拿到标签中text
+            // alert("提示");
+          },
+        },
+      });
+    </script>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //以阻止 vue 在启动时生成生产提示。
+    </script>
+  </body>
+</html>

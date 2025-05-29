@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 bodys 前面 -->
+    <script type="text/javascript" src="./js/vue.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //以阻止 vue 在启动时生成生产提示。
+    </script>
+
+    <div id="app">{{ message }}</div>
+
+    <script>
+      const v = new Vue({
+        // el: '#app',
+        data: {
+          //对象式
+          message: "Hello Vue!",
+        },
+
+        //data 第二种写法    函数式
+        data: function () {
+          return {
+            message: "admin",
+          };
+        },
+
+        data() {
+          return {
+            message: "ad",
+          };
+        },
+      });
+
+      // 第二种写法  延时一秒  在挂载
+
+      setTimeout(() => {
+        v.$mount("#app");
+      }, 1000);
+    </script>
+  </body>
+</html>

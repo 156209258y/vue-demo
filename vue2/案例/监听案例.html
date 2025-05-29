@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 body 前面 -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+      * {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <h2>今天天气热{{info}}</h2>
+      <button @click="changeweather">切换天气</button>
+
+      <h2>今天天气热{{numbers.a}}</h2>
+      <button @click="numbers.a++">点击让a加1</button>
+    </div>
+    <script type="text/javascript">
+      Vue.config.productionTip = false; // 阻止 Vue 启动时生成生产提示
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "尚硅谷",
+          isHot: true,
+          numbers: {
+            a: 1,
+            b: 2,
+          },
+        },
+        computed: {
+          info() {
+            return this.isHot ? "炎热" : "凉爽";
+          },
+        },
+        methods: {
+          changeweather() {
+            this.isHot = !this.isHot;
+          },
+          // 添加方法
+        },
+        watch: {
+          //当
+          isHot: {
+            // immediate:true,   //初始化让handler 运行一下
+            handler(newvalue, oldvalue) {
+              console.log("ishot 被修改了", newvalue, oldvalue);
+            },
+          },
+          //监视多级结构中某个属性的变化
+          "numbers.a": {
+            handler(newvalue, oldvalue) {
+              "a 值变化了", newvalue, oldvalue;
+            },
+          },
+          numbers: {
+            //监视多级结构中所有个属性的变化
+            deep: true, //会监听 numbers中的值
+            handler(newvalue, oldvalue) {
+              console.log("numbers的值变化了");
+            },
+          },
+          //简写   当不需要额外配置的时候   比如 设置deep
+          numbers(newvalue, oldvalue) {
+            console.log("numbers的值变化了", newvalue, oldvalue);
+          },
+        },
+      });
+
+      //watch 另一种写法
+      vm.$watch("isHot", {
+        // immediate:true,   //初始化让handler 运行一下
+        handler(newvalue, oldvalue) {
+          //   console.log("ishot 被修改了", newvalue, oldvalue);
+        },
+      });
+      //简写
+      vm.$watch("isHot", function () {
+        // console.log("ishot 被修改了", newvalue, oldvalue);
+      });
+    </script>
+  </body>
+</html>

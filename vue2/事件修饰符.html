@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 bodys 前面 -->
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <style>
+      * {
+        margin-top: 20px;
+      }
+      .demo1 {
+        height: 50px;
+        background-color: skyblue;
+      }
+      .box1 {
+        padding: 5px;
+        background-color: skyblue;
+      }
+      .box2 {
+        padding: 5px;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <h2>欢迎来到{{name}}</h2>
+      <a @click="showindex" href="http://www.baidu.com">点我提示信息</a>
+
+      <!-- vue中事件修饰符
+    1.prevent:阻止默认事件
+    2.stop 阻止事件冒泡
+    3.once 事件只触发一次
+    4.capture 使用事件的捕获模式
+    5.self  只有event.target 是当前操作元素才触发事件
+    passive  事件的默认行为立刻执行，无需等待事件回调执行完毕
+    -->
+      <a @click.prevent="showindex1" href="http://www.baidu.com"
+        >点我不会跳转信息</a
+      >
+
+      <div class="demo1" @click="showindex">
+        <button @click="showindex1">点击提示信息(会输出两次)</button>
+        <button @click.stop="showindex1">
+          点击提示信息（加入了stop修饰符 阻止事件冒泡）
+        </button>
+      </div>
+      <button @click.once="showindex1">
+        点击提示信息（加入了once修饰符 事件只触发一次）
+      </button>
+      <!-- 使用事件的捕获模式     capture-->
+
+      <div class="box1" @click.capture="showmsg(1)">
+        div1
+        <div class="box2" @click.capture="showmsg(2)">div2</div>
+      </div>
+      <!-- 只有event.target 是当前操作元素时才触发事件 -->
+      <div class="demo1" @click.self="inputtarget">
+        <button @click="inputtarget">点我提示信息（输出元素）</button>
+      </div>
+      <!-- 事件的默认行为立即执行  无需等待事件回调完毕    -->
+
+         <div class="demo1" @click="showindex1(23456)">
+          <!-- 会输出两次 alert   +  跳转    加上prevent stop  就不会 -->
+        <a href="http://www.baidu.com" @click.prevent.stop ="showindex1(23456)">取消冒泡在阻止调整a标签</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //以阻止 vue 在启动时生成生产提示。
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "尚硅谷",
+        },
+        methods: {
+          inputtarget(e) {
+            console.log(e.target);
+          },
+          showindex(e) {
+            //a标签 默认 就是 跳转
+            e.preventDefault(); //取消跳转
+            alert("同学你好！！！");
+          },
+          showindex1(e) {
+            // e.stopPropagation()  //阻止事件冒泡
+            alert("同学你好！！！");
+          },
+          showmsg(e) {
+            // e.stopPropagation()  //阻止事件冒泡
+            console.log(e);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

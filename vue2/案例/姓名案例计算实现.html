@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 body 前面 -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+      * {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- :value  不能同步改变值   v-model 跨域 -->
+    <div id="root">
+      姓:<input type="text" v-model="firstname" /> <br />
+      名:<input type="text" v-model="lastname" /> <br /><br />
+      <!-- slice(0,3) 截取前三位   {{}} 中业务太多 推荐使用method-->
+      姓名:<span>{{fullname}}</span>
+    </div>
+    <script type="text/javascript">
+      Vue.config.productionTip = false; // 阻止 Vue 启动时生成生产提示
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "尚硅谷",
+          firstname: "张",
+          lastname: "三",
+        },
+        computed: {
+          // 只要有人调用fullname  就会调用一次get
+          // fullname: {
+          //   get() {
+          //     return this.firstname + "-" + this.lastname;
+          //   },
+          //   //set  fullname被修改时
+          //   set(value) {
+          //     const arr = value.spilt("-");
+          //     this.firstname = arr[0];
+          //     this.lastname = arr[1];
+          //   },
+          // },
+
+          //简写   只有只读取 不修改时
+          fullname() {
+            return this.firstname + "-" + this.lastname;
+          },
+        },
+        methods: {
+          // 添加方法
+        },
+      });
+    </script>
+  </body>
+</html>

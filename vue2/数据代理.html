@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Test</title>
+    <!-- Vue 脚本建议放在 <head> 中或紧靠 bodys 前面 -->
+    <script type="text/javascript" src="./js/vue.js"></script>
+  </head>
+  <body>
+    <script>
+      // 数据代理   obj2  管理obj1中的属性
+      let obj1 = { x: 100 };
+      let obj2 = { y: 200 };
+      Object.defineProperty(obj2, "x", {
+        get() {
+          return obj1.x;
+        },
+        set(value) {
+          obj1.x = value;
+        },
+      });
+    </script>
+
+    <script type="text/javascript">
+      Vue.config.productionTip = false; //以阻止 vue 在启动时生成生产提示。
+    </script>
+  </body>
+</html>
