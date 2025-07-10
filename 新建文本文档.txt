@@ -1,0 +1,65 @@
+提交代码（你写完一次功能后的常规流程）
+git add .
+git commit -m "添加了登录接口/优化商品推荐组件"
+git push
+
+//拉取代码 
+git pull
+
+
+
+
+
+//Git 仓库初始化与配置
+git init	初始化本地仓库
+git config --global user.name "你的名字"	设置全局用户名
+//Git 仓库初始化与配置
+git config --global user.email "你的邮箱"	设置全局邮箱
+git config --list	查看当前配置
+
+//基本操作
+git status	查看当前状态
+git add 文件名	添加指定文件到暂存区
+git add .	添加所有文件到暂存区
+git commit -m "提交说明"	提交暂存区到本地仓库
+git rm 文件名	删除文件并加入暂存区
+git mv 旧名 新名	重命名文件并加入暂存区
+
+//分支操作
+git branch	查看所有分支
+git branch 分支名	创建新分支
+git checkout 分支名	切换分支
+git checkout -b 分支名	创建并切换到新分支
+git merge 分支名	合并指定分支到当前分支
+git branch -d 分支名	删除分支
+
+//远程操作
+git remote -v	查看远程地址
+git remote add origin 地址	添加远程仓库
+git push -u origin master	第一次推送本地代码到远程仓库
+git push	推送代码到远程
+git pull	拉取远程最新代码并合并
+git clone 地址	克隆远程仓库
+
+//查看日志与差异
+git log	查看提交日志
+git log --oneline	简洁模式查看日志
+git diff	查看工作区与暂存区差异
+git diff --cached	查看暂存区与最新提交的差异
+
+//撤销与回退
+git checkout -- 文件名	撤销对文件的修改
+git reset HEAD 文件名	取消已添加到暂存区的文件
+git reset --hard 提交id	回退到某个提交点（危险操作）
+git revert 提交id	撤销某次提交，保留历史
+
+//标签管理（可选）
+git tag	查看标签
+git tag      标签名	  创建标签
+git tag -d 标签名	  删除标签
+git push origin 标签名	推送标签到远程
+
+
+
+
+
